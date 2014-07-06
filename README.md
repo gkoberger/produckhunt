@@ -4,6 +4,7 @@ SETUP
 -----
 
     git clone https://github.com/gkoberger/big-gulp.git
+    cd big-gulp
     npm install
     bower install
 
@@ -17,4 +18,11 @@ USING
     gulp serve
 
 Go to http://localhost:8080
+
+TODO
+----
+
+    [ ] Make bower easier to install stuff
+    [ ] Include bower stuff in the minified files
+    [ ] Add s3 sync styff
 
