@@ -1,9 +1,58 @@
 extends layout
 
 block content
-  .container
-    .big-gulp
-      img(src="/img/big-gulp.png")
-      strong Welcome to your new static website
-      a.btn.btn-primary#test-js(href="#")
-        i.fa.fa-thumbs-up.fa-right It works!
+  #mobile
+    a#trigger(href="")
+  #desktop
+    #setup.full
+      .pg1
+        include logo
+        h1 Produck Hunt
+        .number
+          input(type="text", placeholder="Phone Number", id="phone-input")
+          
+      .pg2
+        h1 Use code <span class="id"></span>
+        include phone
+
+      .pg3
+        .wrapper
+          .hand
+          .phone
+        div more test shots: <span class="testshots">5</span>
+
+      .pg4
+        #current
+        .target
+
+      .pg5.full
+        #dot
+        .bird.bird1
+        .bird.bird0
+        .bird.bird2
+        .grass
+        .stats
+          .container
+            .row
+              .col-xs-3
+                .stats-box#stats-votes
+                  span VOTES LEFT
+                  .vote.v1
+                  .vote.v2
+                  .vote.v3
+              .col-xs-5
+                .stats-box.stats-hunted 
+                  span PRODUCTS HUNTED
+                  .stat-hit
+                  .stat-hit
+                  .stat-hit
+                  .stat-hit
+                  .stat-hit
+                  .stat-hit
+              .col-xs-4
+                .stats-box.stats-score
+                  span SCORE (LVL <em id="current-level">0</em>)
+                  strong#score 000000
+
+  style#css
+

@@ -1,10 +1,495 @@
 @import nib
 
 greyish = #eee
+mono = 'VT323', Courier
 
 body
   background-color greyish
 
+.mobile #desktop
+  display none
+
+#mobile
+  display none
+  .mobile &
+    display block
+
+#setup
+  background radial-gradient(#f4ce64, #c59615)
+  overflow hidden
+  position absolute
+  .pg1
+    h1
+      margin-top 110px
+      font-family mono
+      font-size 74px
+      text-align center
+    .number
+      border-top 10px solid #000
+      width 300px
+      margin-top 20px
+      border-bottom 10px solid #000
+      margin auto
+      position relative
+      &:before, &:after
+        content ""
+        background-color #000
+        width 10px
+        height 100%
+        display block
+        left -10px
+        position absolute
+        top 0
+      &:after
+        left auto
+        right -10px
+      input
+        width 300px
+        font-size 30px
+        text-align center
+        padding 8px 15px
+        font-family mono
+        border 0
+        &:focus, &:active
+          outline 0
+    #start
+      margin auto
+      display block
+      width 250px
+      text-align center
+      margin-top 120px
+      color #fff
+      text-decoration none
+      background-color #d85636
+      font-family mono
+      padding 12px 0
+      font-size 30px
+      border-top 10px solid #333
+      border-bottom 10px solid #333
+      position relative
+      &:hover
+        background-color darken(#d85636, 15%)
+      &:before, &:after
+        width 10px
+        height 100%
+        position absolute
+        top 0
+        left -10px
+        background-color #333
+        display block
+        content ""
+      &:after
+        right -10px
+        left auto
+    .logo
+      width 154px
+      height 154px
+      position relative
+      left 50%
+      margin-left -77px
+      .empty, .black, .white, .orange
+        width 14px
+        height 14px
+        float left
+      .black
+        background-color #222
+      .white
+        background-color #fff
+      .orange
+        background-color #d85636
+      animation logo 2.5s ease-out infinite
+    .shadow
+      width 130px
+      height 130px
+      background-color rgba(0,0,0,0.1)
+      border-radius 200px
+      left 50%
+      position absolute
+      margin-left -65px
+      transform scaleY(.2)
+      animation shadow 2.5s ease-out infinite
+  .pg2
+    display none
+    .phone-container
+      margin auto
+      top -110px
+      width 14px * 12
+      height 14px * 24
+      position relative
+      perspective 1000px
+      .shadow
+        width 180px
+        height 260px
+        position absolute
+        top 130px
+        background-color rgba(0,0,0,0.05)
+        transform rotateX(610deg) rotateY(0deg) rotateZ(-160deg)
+        transform-style preserve-3d
+        border-radius 10px
+        animation phone-spin 9s linear infinite
+    .phone
+      width 14px * 12
+      height 14px * 24
+      position absolute
+      transform-style preserve-3d
+      transform rotateX(610deg) rotateY(0deg) rotateZ(-160deg)
+      animation phone-spin 9s linear infinite
+      & > *
+        position absolute
+        top 0
+        left 0
+      .left-a
+        background-color #000
+        width 14px * 2
+        height 14px * 24
+        transform rotateY(-90deg)
+        transform-origin 0 0
+      .right-a
+        background-color #000
+        margin-left 14px * 12
+        width 14px * 2
+        height 14px * 24
+        transform rotateY(-90deg)
+        transform-origin 0 0
+      .front-a
+        background-color #333
+        width 14px * 12
+        height 14px * 24
+        transform rotateY(0deg) translateZ(0px)
+        .screen
+          width 14px * 12
+          height 14px * 22 
+          margin-left 0px
+          margin-top 14px
+          background-color #eee
+          position relative
+          .middle
+            position relative
+            margin-left 14px
+            top 14px
+            background-color #999
+            width 14px * 10
+            height 14px * 17
+          .button
+            position absolute
+            bottom 14px * 2
+            width 14px
+            height 14px
+            left 14px * 5
+            background-color #ccc
+          .corner
+            width 14px
+            height 14px
+            background-color #333
+            position absolute
+            &.tl
+              top 0
+              left 0
+            &.tr
+              top 0
+              right 0
+            &.bl
+              bottom 0
+              left 0
+            &.br
+              bottom 0
+              right 0
+
+      .bottom-a
+        background-color #555
+        height 14px * 2
+        width 14px * 12
+        transform rotateX(90deg)
+        transform-origin 0 0
+      .top-a
+        background-color #555
+        height 14px * 2
+        width 14px * 12
+        transform rotateX(90deg)
+        transform-origin 0 0
+        margin-top 14px * 24
+
+      .left-b
+        background-color #000
+        width 14px * 2
+        height 14px * 22
+        transform rotateY(-90deg)
+        transform-origin 0 0
+        margin-left -14px
+        margin-top 14px
+      .front-b
+        background-color #333
+        width 14px * 1
+        height 14px * 22
+        transform rotateY(0deg) translateZ(0px)
+        margin-left -14px
+        margin-top 14px
+      .right-b
+        background-color #000
+        margin-left 14px * 13
+        margin-top 14px
+        width 14px * 2
+        height 14px * 22
+        transform rotateY(-90deg)
+        transform-origin 0 0
+      .front-b2
+        background-color #333
+        width 14px * 1
+        height 14px * 22
+        transform rotateY(0deg) translateZ(0px)
+        margin-left 14px * 12
+        margin-top 14px
+      .bottom-b
+        background-color #555
+        height 14px * 2
+        width 14px * 1
+        transform rotateX(90deg)
+        transform-origin 0 0
+        margin-top 14px
+        margin-left -14px
+      .bottom-b2
+        background-color #555
+        height 14px * 2
+        width 14px * 1
+        transform rotateX(90deg)
+        transform-origin 0 0
+        margin-top 14px
+        margin-left 14px * 12
+      .top-b
+        background-color #555
+        height 14px * 2
+        width 14px * 1
+        transform rotateX(90deg)
+        transform-origin 0 0
+        margin-top 14px * 23
+        margin-left -14px
+      .top-b2
+        background-color #555
+        height 14px * 2
+        width 14px * 1
+        transform rotateX(90deg)
+        transform-origin 0 0
+        margin-top 14px * 23
+        margin-left 14px * 12
+  .pg3
+    display none
+    .wrapper
+      margin auto
+      position relative
+      width 536px
+      height 300px
+      .hand
+        position absolute
+        top 0
+        left 0
+        z-index 100
+        width 476px
+        height 300px
+        image '../img/3-hand.png' 476px 300px
+      .phone
+        position absolute
+        top 21px
+        left 231px
+        width 292px
+        height 168px
+        image '../img/3-phone.png' 292px 168px
+  .pg4
+    display none
+    .target
+      width 100px
+      height 100px
+      margin-left -50px
+      margin-top -50px
+      background-color red
+      position absolute
+      transition 1s ease-out
+      left 0
+      top 0
+      &.t
+        left 50%
+        top 0%
+      &.r
+        left 100%
+        top 50%
+      &.b
+        left 50%
+        top 100%
+  .pg5
+    background-color #48c5ff
+    display none
+    .grass
+      z-index 100
+      image '../img/grass.png' 475px 230px
+      width 100%
+      height 230px
+      bottom 100px
+      left 0
+      position absolute
+    .stats
+      background-color #7d6b15
+      height 100px
+      bottom 0
+      left 0
+      width 100%
+      position absolute
+      .stats-box
+        z-index 101
+        border-top 7px solid #333
+        border-bottom 7px solid #333
+        height 110px
+        background-color #fff
+        position relative
+        top -20px
+        position relative
+        margin 0 20px
+        font-family mono
+        text-align center
+        font-size 30px
+        padding-top 10px
+        line-height 1em
+        &#stats-votes
+          .vote
+            display inline-block
+            margin 5px
+            width 35px
+            height 39px
+            image '../img/votes.png' 70px 39px
+            background-position 0 0
+          &.shots-2, &.shots-1,&.shots-0
+            .v3
+              background-position -35px 0
+          &.shots-1,&.shots-0
+            .v2
+              background-position -35px 0
+          &.shots-0
+            .v1
+              background-position -35px 0
+        .stat-hit
+          display inline-block
+          margin 5px
+          width 35px
+          height 35px
+          image '../img/score.png' 105px 35px
+          background-position -35px 0
+          &.status-missed
+            background-position -70px 0
+          &.status-hit
+            background-position 0 0
+          &.status-current
+            background-position 0 0
+            animation flash 1s infinite
+        span
+          display block
+          em
+            font-style normal
+        strong
+          display block
+          font-size 50px
+        &:before, &:after
+          position absolute
+          left -7px
+          top 0
+          height 100%
+          width 7px
+          content ""
+          background-color #333
+          display block
+        &:after
+          left auto
+          right -7px
+    .bird
+      position absolute
+      left 500px
+      bottom 0
+      width 275px
+      height 148px
+      image '../img/ph.png' 1100px 148px
+      animation fly 0.8s steps(4) infinite
+      &.reset
+        transition transform 0s ease-out 0 !important
+      &.active
+        transition transform 0.5s ease-out
+      &.bird0
+        left 45%
+      &.bird1
+        left 15%
+        transition transform .5s ease-out 1s
+        animation-delay 0.4s
+        image '../img/ph2.png' 1100px 148px
+      &.bird2
+        left 75%
+        transition transform .5s ease-out 2s
+        animation-delay 0.4s
+        image '../img/ph1.png' 1100px 148px
+      &.hit
+        opacity 0.3
+        transform translateY(0) !important
+        transition transform .5s ease-out 0
+      &.fly
+        opacity 0.3
+        transition transform .5s ease-out 0
+    #dot
+      top 0
+      left 0
+      width 72px
+      height 57px
+      image '../img/pointer.png' 72px 57px
+      position absolute
+      z-index 1000
+  
+@keyframes fly
+  to
+    background-position -1100px 0
+    
+@keyframes flash
+  0%
+    opacity 1
+  50%
+    opacity 0
+  100%
+    opacity 1
+    
+@keyframes logo
+  0%
+    transform translate(0)
+  50%
+    transform translateY(15px)
+  100%
+    transform translate(0)
+    
+@keyframes shadow
+  0%
+    transform scaleY(.2)
+  50%
+    transform scaleY(.25) scaleX(1.2)
+  100%
+    transform scaleY(.2)
+    
+@keyframes phone-spin
+  0%
+    transform rotateX(610deg) rotateY(0deg) rotateZ(200deg)
+  100%
+    transform rotateX(610deg) rotateY(0deg) rotateZ(-160deg)
+
+#trigger
+  width 700px
+  height 300px
+  display block
+  background-color red
+  font-size 100px
+  color #fff
+
+#box
+  position absolute
+  background-color #ddd
+  top 0
+  left 0
+  opacity 0.5
+  #dot
+    width 10px
+    height 10px
+    background-color red
+    position absolute
 
 .big-gulp
   text-align center
