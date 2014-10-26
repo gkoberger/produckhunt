@@ -1,24 +1,27 @@
 doctype html
 html(lang="en")
-head
-  meta(charset="utf-8")
-  title BigGulp 
-  link(rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css")
-  link(rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap-theme.min.css")
-  link(rel="stylesheet" href="lib/fontawesome/css/font-awesome.min.css")
-  link(rel="stylesheet" href="css/all.min.css")
+  head
+    meta(charset="utf-8")
+    title Produck Hunt 
+    link(rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css")
+    link(rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap-theme.min.css")
+    link(rel="stylesheet" href="/lib/fontawesome/css/font-awesome.min.css")
+    link(rel="stylesheet" href="/css/all.min.css")
+    link(rel="shortcut icon" href="/img/favicon.ico")
 
-  link(href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css')
+    meta(name="viewport" content="width=device-width, user-scalable=no")
 
-  block head
-  //if lt IE 7
-    script(src="http://html5shiv.googlecode.com/svn/trunk/html5.js")
+    link(href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css')
 
-body#home
-  block content
+    block head
+    //if lt IE 7
+      script(src="http://html5shiv.googlecode.com/svn/trunk/html5.js")
 
-  script(src="lib/jquery/dist/jquery.min.js")
-  script(src="lib/bootstrap/dist/js/bootstrap.js")
-  block foot
-  script(src="js/all.min.js")
+  body#home
+    block content
+
+    script(src="lib/jquery/dist/jquery.min.js")
+    script(src="lib/bootstrap/dist/js/bootstrap.js")
+    block foot
+    script(src="js/all.min.js")
 

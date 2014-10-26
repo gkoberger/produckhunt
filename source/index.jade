@@ -4,32 +4,59 @@ block content
   #mobile
     a#trigger(href="")
   #desktop
+    #flash
     #setup.full
       .pg1
         include logo
         h1 Produck Hunt
         .number
-          input(type="text", placeholder="Phone Number", id="phone-input")
+          input(type="text", placeholder="Enter Phone Number", id="phone-input")
           
       .pg2
-        h1 Use code <span class="id"></span>
+        h2 Waiting for connection from phone&hellip;
+        p Didn't get a text? Go to produckhunt.co and enter <strong class="id"></strong>
         include phone
 
       .pg3
+        h2 Hold like a gun, and tap the screen with your trigger finger
         .wrapper
           .hand
           .phone
-        div more test shots: <span class="testshots">5</span>
+        h3 Take <strong class="testshots">5</strong> more test shots to continue!
 
       .pg4
-        #current
+        .center
+          h2 Calibrating Gun
+          h3 Fire once at each rotating target location
         .target
+          .spinner
 
       .pg5.full
+        #dog
+        #dogLaugh
+        #gameOver
+          h2 Game Over
+          a(href="/")#restart Try Again
+        #showscore
         #dot
-        .bird.bird1
-        .bird.bird0
-        .bird.bird2
+        .bird-parent.bird-parent1
+          .frantic
+            .bird.bird1
+              .details
+                h3
+                p
+        .bird-parent.bird-parent0
+          .frantic
+            .bird.bird0
+              .details
+                h3
+                p
+        .bird-parent.bird-parent2
+          .frantic
+            .bird.bird2
+              .details
+                h3
+                p
         .grass
         .stats
           .container
@@ -51,7 +78,7 @@ block content
                   .stat-hit
               .col-xs-4
                 .stats-box.stats-score
-                  span SCORE (LVL <em id="current-level">0</em>)
+                  span SCORE (LVL <em id="current-level">1</em>)
                   strong#score 000000
 
   style#css

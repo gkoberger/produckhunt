@@ -5,6 +5,39 @@ mono = 'VT323', Courier
 
 body
   background-color greyish
+  &.mobile.ready
+    background-color #000
+    background-image url("../img/instructions.png")
+    background-repeat no-repeat
+    background-position center center
+    min-height 150px
+    background-size contain
+    transition background-color 0.2s ease-out
+    &.flash
+      background-color #fff
+      transition background-color 0s
+    #trigger
+      width 100%
+      height 100%
+      display block
+      position absolute
+      top 0
+      left 0
+
+#flash
+  z-index 10000
+  position absolute
+  top 0
+  left 0
+  width 100%
+  height 100%
+  background-color rgba(#fff, 0.5)
+  pointer-events none
+  opacity 0
+  transition opacity 0.15s ease-out
+  &.on
+    opacity 1
+    transition opacity 0s
 
 .mobile #desktop
   display none
@@ -19,6 +52,10 @@ body
   overflow hidden
   position absolute
   .pg1
+    top 50%
+    margin-top -260px
+    position absolute
+    width 100%
     h1
       margin-top 110px
       font-family mono
@@ -109,6 +146,22 @@ body
       transform scaleY(.2)
       animation shadow 2.5s ease-out infinite
   .pg2
+    display block
+    height 310px
+    top 50%
+    position absolute
+    width 100%
+    margin-top -160px
+    h2
+      margin-bottom 10px
+      text-align center
+      color rgba(0,0,0,0.5)
+      font-family mono
+    p
+      margin-bottom 40px
+      text-align center
+      color rgba(0,0,0,0.5)
+      font-family mono
     display none
     .phone-container
       margin auto
@@ -273,6 +326,22 @@ body
         margin-left 14px * 12
   .pg3
     display none
+    width 100%
+    position absolute
+    top 50%
+    margin-top -200px
+    text-align center
+    h2
+      margin-bottom 40px
+      text-align center
+      color rgba(0,0,0,0.8)
+      font-size 40px
+      font-family mono
+    h3
+      margin-top 30px
+      text-align center
+      color rgba(0,0,0,0.5)
+      font-family mono
     .wrapper
       margin auto
       position relative
@@ -286,6 +355,10 @@ body
         width 476px
         height 300px
         image '../img/3-hand.png' 476px 300px
+        opacity 1
+        transition 0.5s ease-out
+        transform rotate(20deg)
+        transform-origin 0 80%
       .phone
         position absolute
         top 21px
@@ -293,18 +366,56 @@ body
         width 292px
         height 168px
         image '../img/3-phone.png' 292px 168px
+        opacity 1
+        transition 0.5s ease-out
+        transform rotate(-20deg)
+        transform-origin 0 50%
+    &.loaded
+      .wrapper
+        .hand, .phone
+          transform translate(0)
+          opacity 1
   .pg4
     display none
+    .center
+      position absolute
+      top 50%
+      left 0
+      width 100%
+      height 220px
+      margin-top -120px
+    h2
+      margin-top 0
+      margin-bottom 140px
+      text-align center
+      color rgba(0,0,0,0.8)
+      font-size 40px
+      font-family mono
+    h3
+      margin-top 30px
+      text-align center
+      color rgba(0,0,0,0.5)
+      font-family mono
     .target
-      width 100px
-      height 100px
-      margin-left -50px
-      margin-top -50px
-      background-color red
+      width 60px
+      height 60px
+      margin-left -30px
+      margin-top -30px
+      background-color #fff
+      border-radius 200px
       position absolute
       transition 1s ease-out
       left 0
       top 0
+      .spinner
+        position absolute
+        top -20px
+        left -20px
+        image '../img/loading.png' 100px 100px
+        background-size cover
+        width 100px
+        height 100px
+        animation spin 0.8s linear infinite
       &.t
         left 50%
         top 0%
@@ -317,6 +428,82 @@ body
   .pg5
     background-color #48c5ff
     display none
+    #gameOver
+      display none
+      text-align center
+      color #fff
+      padding-top 100px
+      font-family mono
+      h2
+        font-size 80px
+      #restart
+        margin auto
+        display block
+        width 250px
+        text-align center
+        color #fff
+        text-decoration none
+        background-color #d85636
+        font-family mono
+        padding 12px 0
+        font-size 30px
+        border-top 10px solid #333
+        border-bottom 10px solid #333
+        position relative
+        &:hover
+          background-color darken(#d85636, 15%)
+        &:before, &:after
+          width 10px
+          height 100%
+          position absolute
+          top 0
+          left -10px
+          background-color #333
+          display block
+          content ""
+        &:after
+          right -10px
+          left auto
+    #dogLaugh
+      image '../img/dogLaugh.png' 256px 134px
+      width 128px
+      height 134px
+      position absolute
+      bottom 0
+      right 230px
+      transition transform 0.8s ease-out
+      &.on
+        transform translateY(-292px)
+        animation laugh 0.6s steps(2) infinite
+    #dog
+      image '../img/dog.png' 353px 224px
+      width 343px
+      height 224px
+      position absolute
+      bottom 0
+      right 200px
+      transition 0.8s ease-out
+      &.on
+        transform translateY(-280px)
+    #showscore
+      width 275px
+      color #fff
+      font-family mono
+      position absolute
+      width 275px
+      color #fff
+      font-family 'VT323', Courier
+      position absolute
+      font-size 50px
+      line-height 0
+      text-align center
+      opacity 0
+      transition 0.9s ease-out
+      transform translateY(0px)
+      &.on
+        transition 0s
+        opacity 1
+        transform translateY(40px)
     .grass
       z-index 100
       image '../img/grass.png' 475px 230px
@@ -397,30 +584,65 @@ body
         &:after
           left auto
           right -7px
-    .bird
+    .bird-parent
       position absolute
-      left 500px
       bottom 0
       width 275px
       height 148px
-      image '../img/ph.png' 1100px 148px
-      animation fly 0.8s steps(4) infinite
+      .bird
+        width 275px
+        height 148px
+        image '../img/ph.png' 1100px 148px
+        animation fly 0.8s steps(4) infinite
+      .details
+        top 155px
+        position relative
+        h3
+          margin-bottom 0
+          color #fff
+          font-size 20px
+          text-align center
+          height 1.2em
+          overflow hidden
+          text-overflow ellipsis
+          white-space nowrap
+          font-family mono
+        p
+          color rgba(#fff, 0.8)
+          font-size 16px
+          text-align center
+          font-family mono
+          height 1.2em
+          overflow hidden
+          text-overflow ellipsis
+          white-space nowrap
+          font-family mono
       &.reset
         transition transform 0s ease-out 0 !important
       &.active
         transition transform 0.5s ease-out
-      &.bird0
+        .frantic
+          animation frantic 10.8s infinite
+        &.bird-parent1
+          .frantic
+            animation frantic 13.8s infinite -5.3s
+        &.bird-parent2
+          .frantic
+            animation frantic 8.8s infinite -9.3s
+      &.bird-parent0
         left 45%
-      &.bird1
+      &.bird-parent1
         left 15%
-        transition transform .5s ease-out 1s
+        transition transform .5s ease-out 0.4s
         animation-delay 0.4s
-        image '../img/ph2.png' 1100px 148px
-      &.bird2
+        .bird
+          image '../img/ph2.png' 1100px 148px
+      &.bird-parent2
         left 75%
-        transition transform .5s ease-out 2s
+        transition transform .5s ease-out 0.8s
         animation-delay 0.4s
-        image '../img/ph1.png' 1100px 148px
+        .bird
+          image '../img/ph1.png' 1100px 148px
       &.hit
         opacity 0.3
         transform translateY(0) !important
@@ -437,9 +659,45 @@ body
       position absolute
       z-index 1000
   
+@keyframes laugh
+  to
+    background-position 256px 0
+    
 @keyframes fly
   to
     background-position -1100px 0
+    
+@keyframes frantic
+  0%
+    transform translateX(0px)
+  10%
+    transform translateY(-130px)
+  20%
+    transform translateX(-130px) translateY(40px)
+  30%
+    transform translateY(-130px)
+  40%
+    transform translateY(30px) translateX(50px)
+  50%
+    transform translateX(130px)
+  60%
+    transform translateX(0px)
+  70%
+    transform translateX(0px) translateY(-30px)
+  80%
+    transform translateY(-120px) translateY(0px)
+  90%
+    transform translateY(120px) translateX(20px)
+  100%
+    transform translateX(0px)
+    
+@keyframes spin
+  0%
+    transform rotate(0deg)
+  50%
+    transform rotate(180deg)
+  100%
+    transform rotate(360deg)
     
 @keyframes flash
   0%
@@ -470,14 +728,6 @@ body
     transform rotateX(610deg) rotateY(0deg) rotateZ(200deg)
   100%
     transform rotateX(610deg) rotateY(0deg) rotateZ(-160deg)
-
-#trigger
-  width 700px
-  height 300px
-  display block
-  background-color red
-  font-size 100px
-  color #fff
 
 #box
   position absolute

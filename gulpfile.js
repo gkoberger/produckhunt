@@ -1,9 +1,11 @@
 var gulp = require('gulp');
+var fs = require('fs');
 
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var stylus = require('gulp-stylus');
 var nib = require('nib');
+var s3 = require('gulp-s3');
 var imagemin = require('gulp-imagemin');
 var bower = require('gulp-bower');
 var jade = require('gulp-jade');
@@ -75,4 +77,9 @@ gulp.task('serve', ['watch'], function() {
 
 // The default task (called when you run `gulp` from cli)
 gulp.task('default', ['templates', 'scripts', 'images', 'css', 'bower']);
+
+gulp.task('sync', ['default'], function() {
+  var aws = JSON.parse(fs.readFileSync('./aws.json'));
+  gulp.src('build/**').pipe(s3(aws));
+});
 
