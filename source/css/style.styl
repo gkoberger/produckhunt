@@ -52,15 +52,16 @@ body
   overflow hidden
   position absolute
   .pg1
-    top 50%
-    margin-top -260px
+    padding-top 100px
     position absolute
     width 100%
     h1
-      margin-top 110px
-      font-family mono
-      font-size 74px
-      text-align center
+      width 437px
+      height 82px
+      image '../img/logo.png' 437px 82px
+      background-repeat no-repeat
+      margin 70px auto 0
+      text-indent -99999px
     .number
       border-top 10px solid #000
       width 300px
@@ -89,44 +90,95 @@ body
         border 0
         &:focus, &:active
           outline 0
+    .demo
+      width 550px
+      margin auto
+      height 300px
+      position relative
+      .hand
+        width 164px
+        height 94px
+        image '../img/gun.png' 164px 94px
+        top 60px
+        left 60px
+        position absolute
+        animation hand 8s linear infinite
+      .computer
+        width 370px
+        height 244px
+        right 0
+        bottom 0
+        position absolute
+        .bg
+          background-color #48c5ff
+          width 164px
+          height 150px
+          position absolute
+          right 26px
+          bottom 80px
+          transform rotate(10deg)
+        .fly1
+          width 41px
+          height 31px
+          position absolute
+          top 30px
+          left 210px
+          image '../img/fly1.png' 41px 31px
+          animation hand 10.8s infinite -5s
+        .fly2
+          width 41px
+          height 31px
+          position absolute
+          top 30px
+          left 280px
+          image '../img/fly2.png' 41px 31px
+          animation hand 10.8s infinite
+        .overlay
+          width 370px
+          height 244px
+          image '../img/computer.png' 370px 244px
+          position absolute
+          top 0
+          left 0
+          z-index 100
     #start
       margin auto
       display block
-      width 250px
+      width 150px
       text-align center
-      margin-top 120px
+      margin-top 40px
       color #fff
       text-decoration none
       background-color #d85636
       font-family mono
-      padding 12px 0
-      font-size 30px
-      border-top 10px solid #333
-      border-bottom 10px solid #333
+      padding 8px 0
+      font-size 20px
+      border-top 5px solid #333
+      border-bottom 5px solid #333
       position relative
       &:hover
         background-color darken(#d85636, 15%)
       &:before, &:after
-        width 10px
+        width 5px
         height 100%
         position absolute
         top 0
-        left -10px
+        left -5px
         background-color #333
         display block
         content ""
       &:after
-        right -10px
+        right -5px
         left auto
     .logo
-      width 154px
-      height 154px
+      width 66px
+      height 66px
       position relative
       left 50%
-      margin-left -77px
+      margin-left -33px
       .empty, .black, .white, .orange
-        width 14px
-        height 14px
+        width 6px
+        height 6px
         float left
       .black
         background-color #222
@@ -136,13 +188,14 @@ body
         background-color #d85636
       animation logo 2.5s ease-out infinite
     .shadow
-      width 130px
-      height 130px
+      width 60px
+      height 60px
       background-color rgba(0,0,0,0.1)
-      border-radius 200px
+      border-radius 80px
       left 50%
+      margin-top 7px
       position absolute
-      margin-left -65px
+      margin-left -30px
       transform scaleY(.2)
       animation shadow 2.5s ease-out infinite
   .pg2
@@ -666,6 +719,18 @@ body
 @keyframes fly
   to
     background-position -1100px 0
+    
+@keyframes hand
+  0%
+    transform translateX(0px)
+  25%
+    transform translateX(15px) translateY(30px)
+  50%
+    transform translateX(-20px) translateY(15px)
+  75%
+    transform translateY(15px) translateX(30px)
+  100%
+    transform translateX(0px)
     
 @keyframes frantic
   0%
