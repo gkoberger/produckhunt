@@ -51,6 +51,44 @@ body
   background radial-gradient(#f4ce64, #c59615)
   overflow hidden
   position absolute
+  .hand
+    width 164px
+    height 94px
+    top 60px
+    left 60px
+    position absolute
+    animation hand 8s linear infinite
+    .bg
+      position absolute
+      width 71px
+      height 42px
+      left 80px
+      top 10px
+      background-color #000
+      animation flash-phone 2s infinite
+    .overlay
+      position relative
+      z-index 100
+      width 164px
+      height 94px
+      image '../img/gun.png' 164px 94px
+    .finger
+      position absolute
+      z-index 100
+      image '../img/finger.png' 26px 17px
+      background-position 0 0
+      background-repeat no-repeat
+      width 26px
+      height 18px
+      transform rotate(-10deg)
+      transform-origin 0 20px
+      width 24px
+      height 18px
+      left 123px
+      top 34px
+      transform rotate(0deg)
+      transform-origin 0 20px
+      animation trigger 2s infinite
   .pg1
     padding-top 100px
     position absolute
@@ -95,14 +133,6 @@ body
       margin auto
       height 300px
       position relative
-      .hand
-        width 164px
-        height 94px
-        image '../img/gun.png' 164px 94px
-        top 60px
-        left 60px
-        position absolute
-        animation hand 8s linear infinite
       .computer
         width 370px
         height 244px
@@ -110,6 +140,7 @@ body
         bottom 0
         position absolute
         .bg
+          animation flash-computer 2s infinite
           background-color #48c5ff
           width 164px
           height 150px
@@ -200,27 +231,31 @@ body
       animation shadow 2.5s ease-out infinite
   .pg2
     display block
-    height 310px
+    height 440px
     top 50%
     position absolute
     width 100%
-    margin-top -160px
+    margin-top -220px
     h2
       margin-bottom 10px
       text-align center
       color rgba(0,0,0,0.5)
       font-family mono
+      font-size 30px
     p
       margin-bottom 40px
+      font-size 25px
       text-align center
       color rgba(0,0,0,0.5)
       font-family mono
     display none
     .phone-container
       margin auto
-      top -110px
+      top 0px
+      margin-top -110px
+      margin-bottom 120px
       width 14px * 12
-      height 14px * 24
+      height 10px * 24
       position relative
       perspective 1000px
       .shadow
@@ -382,16 +417,42 @@ body
     width 100%
     position absolute
     top 50%
-    margin-top -200px
+    margin-top -260px
     text-align center
+    .stop
+      opacity 0
+      width 114px
+      height 173px
+      image '../img/stop.png' 114px 173px
+      position absolute
+      top 60px
+      left 99px
+      transform translateY(40px)
+      transition 0.4s ease-out
+      &.on
+        opacity 1
+        transform translateX(0px)
+    #progress
+      width 300px
+      height 300px
+      position relative
+      margin auto
+      .progresscircle
+        position absolute
+        top 0
+        left 0
+        width 300px
+        height 300px
+      .hand
+        top 100px
     h2
-      margin-bottom 40px
+      margin-bottom 0
       text-align center
       color rgba(0,0,0,0.8)
       font-size 40px
       font-family mono
     h3
-      margin-top 30px
+      margin 0 0 20px 0
       text-align center
       color rgba(0,0,0,0.5)
       font-family mono
@@ -454,12 +515,17 @@ body
       height 60px
       margin-left -30px
       margin-top -30px
-      background-color #fff
-      border-radius 200px
       position absolute
-      transition 1s ease-out
       left 0
       top 0
+      .dot
+        width 60px
+        height 60px
+        background-color #fff
+        border-radius 200px
+        transition transform 0.3s ease-out
+      &.off .dot
+        transform scale(0)
       .spinner
         position absolute
         top -20px
@@ -720,6 +786,36 @@ body
   to
     background-position -1100px 0
     
+@keyframes trigger
+  0%
+    transform rotate(0)
+  90%
+    transform rotate(0)
+  95%
+    transform rotate(-30deg)
+  100%
+    transform rotate(0)
+
+@keyframes flash-phone
+  0%
+    background-color #222
+  95%
+    background-color #222
+  96%
+    background-color #fff
+  100%
+    background-color #222
+
+@keyframes flash-computer
+  0%
+    background-color #48c5ff
+  95%
+    background-color #48c5ff
+  96%
+    background-color #fff
+  100%
+    background-color #48c5ff
+
 @keyframes hand
   0%
     transform translateX(0px)
@@ -805,14 +901,3 @@ body
     height 10px
     background-color red
     position absolute
-
-.big-gulp
-  text-align center
-  img
-    display block
-    height 250px
-    margin 30px auto 20px
-  strong
-    display block
-    margin-bottom 10px
-

@@ -52,21 +52,15 @@ $(function() {
       if(e.keyCode == 42) {
         window.location.reload();
       }
-      if(e.keyCode == 47) {
-        window.location.hash = 'gk';
-        window.location.reload();
-      }
     });
 
-    if(window.location.hash == '#gk') {
-      setTimeout(function() {
-        window.location.hash = '';
-        pg(2);
-      }, 100);
-    }
+    $('#start').click(function(e) {
+      e.preventDefault();
+      pg(2);
+    });
 
     // Use 7
-    var id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 3).toUpperCase();
+    var id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5).toUpperCase();
     var myFirebaseRef = new Firebase("https://torid-torch-1955.firebaseio.com/" + id);
     $('.id').text(id);
 
@@ -89,7 +83,7 @@ $(function() {
     };
 
     setTimeout(function() {
-              //pg(5);
+              //pg(3);
     }, 100);
 
     var current_pg;
@@ -141,15 +135,17 @@ $(function() {
         events['move'][current_pg](o);
       }
 
-      if(o.shots > current_shots && events['shot'][current_pg]) {
+      if(o.shots > current_shots) {
 
-        events['shot'][current_pg](o);
-        current_shots = o.shots;
+          current_shots = o.shots;
+          if(events['shot'][current_pg]) {
+            events['shot'][current_pg](o);
+          }
 
-        $('#flash').addClass('on');
-        setTimeout(function() {
-          $('#flash').removeClass('on');
-        }, 100);
+          $('#flash').addClass('on');
+          setTimeout(function() {
+            $('#flash').removeClass('on');
+          }, 100);
 
       }
 
@@ -171,26 +167,38 @@ $(function() {
       },
 
       pg3: function() {
-        setTimeout(function() {
-          $('.pg3').addClass('loaded');
-        }, 100);
-        var shotsLeft = 5;
-        return {
-          shot: function() {
-            shotsLeft--;
-            $('.testshots').text(shotsLeft);
-            if(shotsLeft <= 0) {
-              pg(4);
-            }
-          }
-        };
+
+        var circle = new ProgressBar.Circle($('.p1')[0], {
+          color: 'rgba(0,0,0,0.1)',
+          strokeWidth: 3,
+          duration: 8000,
+        });
+
+        var circle2 = new ProgressBar.Circle($('.p2')[0], {
+          color: '#fff',
+          strokeWidth: 3,
+          duration: 3000,
+        });
+
+        circle.animate(1, function() {
+          $('.hand').hide();
+          $('.stop').addClass('on');
+          $('.pg3 h2').text('Stop shooting!');
+          $('.pg3 h3').text("Next, we're now going to calibrate the gun");
+          circle2.animate(1, function() {
+            pg(4);
+          })
+        })
       },
 
       pg4: function() {
         var step = 'c';
         var x = Math.floor(w_width / 2)
         var y = Math.floor(w_height / 2)
-        $('.target').css('transform', 'translateX('+x+'px) translateY('+y+'px)')
+        $('.target').css({
+          left: x,
+          top: y,
+        });
 
         return {
           shot: function(o) {
@@ -215,20 +223,24 @@ $(function() {
               y = Math.floor(w_height / 2)
             }
             // TODO: different browsers (also down below)
-            $('.target').css('transform', 'translateX('+x+'px) translateY('+y+'px)')
+            $('.target').addClass('off');
+            setTimeout(function() {
+              $('.target').css({
+                left: x,
+                top: y,
+              });//'transform', 'translateX('+x+'px) translateY('+y+'px)')
+              $('.target').removeClass('off');
+            }, 320);
 
             step = false;
             $('#current').text(step);
 
             if(pointsTypes.length) {
-              $('.spinner').hide();
               paused = true;
               setTimeout(function() {
                 paused = false;
                 step = pointsTypes.shift();
-                $('#current').text(step);
-                $('.spinner').show();
-              }, 900);
+              }, 300);
             } else {
               pg(5);
             }
