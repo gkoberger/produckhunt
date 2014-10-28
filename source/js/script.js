@@ -22,14 +22,14 @@ $(function() {
       };
 
       $('body').addClass('mobile ready');
-      gyro.frequency = 100;
+      gyro.frequency = 150;
       gyro.startTracking(function(o) {
         realtime.alpha = o.rawAlpha;
         realtime.beta = o.rawBeta;
         myFirebaseRef.child('realtime').set(realtime);
       });
 
-      var points = {connected: true, testshots: 0};
+      var points = {connected: true};
 
       var i = 0;
       $(window).resize(function() {
@@ -254,6 +254,7 @@ $(function() {
           current: 0,
           paused: true,
           ph_i: 0,
+          over: false,
         };
 
         var level = {
@@ -266,6 +267,8 @@ $(function() {
         };
 
         function gameOver() {
+          paused = false;
+          game.over = true;
           $('#dogLaugh').addClass('on');
           $('#gameOver').show();
         }
@@ -288,7 +291,7 @@ $(function() {
         }
 
         function nextRound(firstTime) {
-          game.paused = true;
+          paused = true;
 
           // Clear last round's birds
           _.each(level.birds, function(bird) {
@@ -347,7 +350,7 @@ $(function() {
             }
 
             sync();
-            game.paused = false;
+            paused = false;
 
           }, firstTime ? 100 : 1200);
 
@@ -383,41 +386,53 @@ $(function() {
             $d.css('transform', 'translateX('+l+'px) translateY('+t+'px)');
           },
           'shot': function(o) {
-            if(game.paused) return;
+            if(paused) return;
 
-            level.shots--;
-
-            var allShot = true;
-            var alreadyHit = false;
-            _.each(level.birds, function(bird) {
-              if(bird.hit != 0) return;
-              if(alreadyHit) {
-                allShot = false;
-                return;
-              }
-
-              var box = $('.bird', bird.$el)[0].getBoundingClientRect();
+            if(game.over) {
+              var box = $('#restart')[0].getBoundingClientRect();
               if(l > box.left && l < box.right && t > box.top && t < box.bottom) {
-                // hit
-                alreadyHit = true;
-                bird.hit = 1;
-                level.birdsStatus[bird.i] = 'hit';
-                game.score += bird.ph[1];
-                bird.$el.addClass('hit');
-                $('#showscore').text("+ " + bird.ph[1] + "pts").css({'left': box.left, 'top': box.top}).addClass('on');
-                setTimeout(function() {
-                  $('#showscore').removeClass('on');
-                }, 100);
-              } else {
-                allShot = false;
+                //window.location.reload();
+                pg(4);
+                pointsTypes = ['t', 'r', 'b', 'l'];
+                points = {connected: true};
+                $('#dogLaugh').removeClass('on');
+                $('#gameOver').hide();
               }
-            });
+            } else {
+              level.shots--;
 
-            if(level.shots === 0 || allShot) {
-              nextRound();
+              var allShot = true;
+              var alreadyHit = false;
+              _.each(level.birds, function(bird) {
+                if(bird.hit != 0) return;
+                if(alreadyHit) {
+                  allShot = false;
+                  return;
+                }
+
+                var box = $('.bird', bird.$el)[0].getBoundingClientRect();
+                if(l > box.left && l < box.right && t > box.top && t < box.bottom) {
+                  // hit
+                  alreadyHit = true;
+                  bird.hit = 1;
+                  level.birdsStatus[bird.i] = 'hit';
+                  game.score += bird.ph[1];
+                  bird.$el.addClass('hit');
+                  $('#showscore').text("+ " + bird.ph[1] + "pts").css({'left': box.left, 'top': box.top}).addClass('on');
+                  setTimeout(function() {
+                    $('#showscore').removeClass('on');
+                  }, 100);
+                } else {
+                  allShot = false;
+                }
+              });
+
+              if(level.shots === 0 || allShot) {
+                nextRound();
+              }
+
+              sync();
             }
-
-            sync();
           },
         }
       },
