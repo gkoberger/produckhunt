@@ -70,7 +70,7 @@ $(function() {
     $('#phone-input').keyup(function() {
       if($(this).val().length == 14) {
         $.get('http://phsms.herokuapp.com/message', {number: $(this).val().replace(/[^0-9]/g, ''), url: id})
-        pg(2);
+        pg(2, true);
       }
     });
     $('#phone-input').formatter({
@@ -87,12 +87,12 @@ $(function() {
     }, 100);
 
     var current_pg;
-    function pg(i) {
+    function pg(i, v1) {
       current_pg = 'pg' + i;
       $('.pg1, .pg2, .pg3, .pg4, .pg5, .pg6').hide();
       $('.pg' + i).show();
 
-      var event = pages[current_pg]();
+      var event = pages[current_pg](v1);
       if(event.move) {
         events.move[current_pg] = event.move;
       }
@@ -159,8 +159,17 @@ $(function() {
 
     var pages = {
 
-      pg2: function() {
+      pg2: function(texted) {
         // Waiting for connection
+        $('.show-text').toggle(texted);
+        $('.show-manual').toggle(!texted);
+
+        $('#not-working').click(function(e) {
+          $('.show-text').toggle(false);
+          $('.show-manual').toggle(true);
+          return false;
+        });
+
         return {
           shot: function(){ pg(3); }
         };
@@ -273,6 +282,15 @@ $(function() {
           $('#gameOver').show();
         }
 
+        function newGame() {
+          //window.location.reload();
+          pg(4);
+          pointsTypes = ['t', 'r', 'b', 'l'];
+          points = {connected: true};
+          $('#dogLaugh').removeClass('on');
+          $('#gameOver').hide();
+        }
+
         function nextLevel() {
           $('#dog').addClass('on');
           paused = true;
@@ -356,6 +374,11 @@ $(function() {
 
         }
 
+        $('#restart').click(function(e) {
+          e.preventDefault();
+          newGame();
+        });
+
         nextRound(true);
 
 
@@ -391,12 +414,7 @@ $(function() {
             if(game.over) {
               var box = $('#restart')[0].getBoundingClientRect();
               if(l > box.left && l < box.right && t > box.top && t < box.bottom) {
-                //window.location.reload();
-                pg(4);
-                pointsTypes = ['t', 'r', 'b', 'l'];
-                points = {connected: true};
-                $('#dogLaugh').removeClass('on');
-                $('#gameOver').hide();
+                newGame();
               }
             } else {
               level.shots--;
