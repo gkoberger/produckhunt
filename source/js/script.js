@@ -22,7 +22,7 @@ $(function() {
       };
 
       $('body').addClass('mobile ready');
-      gyro.frequency = 50;
+      gyro.frequency = 100;
       gyro.startTracking(function(o) {
         realtime.alpha = o.rawAlpha;
         realtime.beta = o.rawBeta;

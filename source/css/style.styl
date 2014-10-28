@@ -148,6 +148,16 @@ body
           right 26px
           bottom 80px
           transform rotate(10deg)
+        .dog
+          height 100px
+          image '../img/dog.png' 353px 224px
+          background-size contain
+          background-repeat no-repeat
+          width 80px
+          position absolute
+          bottom 25px
+          right 54px
+          animation 8s dog linear infinite
         .fly1
           width 41px
           height 31px
@@ -786,6 +796,18 @@ body
   to
     background-position -1100px 0
     
+@keyframes dog
+  0%
+    transform: rotate(13deg);
+  70%
+    transform: rotate(13deg);
+  80%
+    transform: rotate(13deg) translate(2px, -50px);
+  90%
+    transform: rotate(13deg) translate(2px, -50px);
+  100%
+    transform: rotate(13deg);
+
 @keyframes trigger
   0%
     transform rotate(0)
