@@ -13,7 +13,26 @@ $(function() {
     }
 
     if(id) {
-      var myFirebaseRef = new Firebase("https://torid-torch-1955.firebaseio.com/" + id);
+      var myFirebaseRef = firebase.database().ref(id); // new Firebase("https://torid-torch-1955.firebaseio.com/" + id);
+
+     if(typeof DeviceOrientationEvent.requestPermission === 'function') {
+       $('#trigger').hide();
+       $('#getStarted').show();
+       $('#getStarted a').click(() => {
+         DeviceOrientationEvent.requestPermission()
+           .then(permissionState => {
+             if (permissionState === 'granted') {
+               window.addEventListener('deviceorientation', () => {});
+               $('#getStarted').hide();
+               $('#trigger').show();
+             } else {
+               alert("We couldn't enable it for some reason");
+             }
+           })
+           .catch(() => { });
+         return false;
+       });
+     }
 
       var realtime = {
         alpha: 0,
@@ -24,8 +43,9 @@ $(function() {
       $('body').addClass('mobile ready');
       gyro.frequency = 150;
       gyro.startTracking(function(o) {
-        realtime.alpha = o.rawAlpha;
-        realtime.beta = o.rawBeta;
+        $('#test').text(JSON.stringify(o));
+        realtime.alpha = o.rawAlpha || 1;
+        realtime.beta = o.rawBeta || 1;
         myFirebaseRef.child('realtime').set(realtime);
       });
 
@@ -61,7 +81,9 @@ $(function() {
 
     // Use 7
     var id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5).toUpperCase();
-    var myFirebaseRef = new Firebase("https://torid-torch-1955.firebaseio.com/" + id);
+   // var myFirebaseRef = firebase.database().ref(); // new Firebase("https://torid-torch-1955.firebaseio.com/" + id);
+    var myFirebaseRef = firebase.database().ref(id); // new Firebase("https://torid-torch-1955.firebaseio.com/" + id);
+
     $('.id').text(id);
 
     gyro.stopTracking();
@@ -69,7 +91,7 @@ $(function() {
     $('#phone-input').focus();
     $('#phone-input').keyup(function() {
       if($(this).val().length == 14) {
-        $.get('http://phsms.herokuapp.com/message', {number: $(this).val().replace(/[^0-9]/g, ''), url: id})
+        $.post('/sms', {number: $(this).val().replace(/[^0-9]/g, ''), url: id})
         pg(2, true);
       }
     });
@@ -136,7 +158,6 @@ $(function() {
       }
 
       if(o.shots > current_shots) {
-
           current_shots = o.shots;
           if(events['shot'][current_pg]) {
             events['shot'][current_pg](o);
@@ -171,12 +192,12 @@ $(function() {
         });
 
         return {
-          shot: function(){ pg(3); }
+          shot: function(){
+            pg(3); }
         };
       },
 
       pg3: function() {
-
         var circle = new ProgressBar.Circle($('.p1')[0], {
           color: 'rgba(0,0,0,0.1)',
           strokeWidth: 3,
@@ -198,6 +219,7 @@ $(function() {
             pg(4);
           })
         })
+        return { };
       },
 
       pg4: function() {

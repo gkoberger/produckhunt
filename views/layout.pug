@@ -1,0 +1,54 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title Produck Hunt
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css")
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css")
+
+    link(rel="stylesheet" href="/javascripts/fontawesome/css/font-awesome.min.css")
+    link(rel="stylesheet", href=`/stylesheets/style.css?${cache}`)
+    link(rel="shortcut icon" href="/img/favicon.ico")
+
+    meta(name="viewport" content="width=device-width, user-scalable=no")
+
+    link(href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css')
+
+    block head
+    //if lt IE 7
+      script(src="http://html5shiv.googlecode.com/svn/trunk/html5.js")
+
+  body#home
+    block content
+
+    script(src="javascripts/underscore-min.js")
+    script(src="javascripts/progressbar.js")
+    script(src="javascripts/jquery.min.js")
+    script(src="javascripts/jquery.min.js")
+    script(src="javascripts/gyro.js")
+    script(src="javascripts/fastclick.js")
+    script(src="javascripts/jquery.formatter.min.js")
+    script(src="javascripts/categorizr.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
+
+    // The core irebase JS SDK is always required and must be listed first
+    script(src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js")
+    script(src="https://www.gstatic.com/firebasejs/7.2.2/firebase-database.js")
+
+    script.
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyAgQBs2425LjBvNnPyYF4EgCJdq7VZhALE",
+        authDomain: "produck-hunt.firebaseapp.com",
+        databaseURL: "https://produck-hunt.firebaseio.com",
+        projectId: "produck-hunt",
+        storageBucket: "produck-hunt.appspot.com",
+        messagingSenderId: "967339208918",
+        appId: "1:967339208918:web:2feb276b2fb4fa2eb85977"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+    block foot
+    script(src=`/javascripts/script.js?${cache}`)
+

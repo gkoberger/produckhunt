@@ -1,4 +1,17 @@
-@import nib
+@import 'nib';
+
+.fa.fa-right:before
+  margin-right 5px
+
+.fa.fa-left:before
+  margin-left 5px
+
+.middot
+  display inline
+  &:before
+    content "\00b7"
+    padding 0 5px
+    display inline-block
 
 greyish = #eee
 mono = 'VT323', Courier
@@ -7,12 +20,35 @@ body
   background-color greyish
   &.mobile.ready
     background-color #000
-    background-image url("../img/instructions.png")
-    background-repeat no-repeat
-    background-position center center
     min-height 150px
-    background-size contain
     transition background-color 0.2s ease-out
+    #getStarted
+      text-align: center;
+      padding: 50px;
+    #getStarted a
+      display: inline-block;
+      text-align: center;
+      color: #fff;
+      text-decoration: none;
+      background-color: #d85636;
+      font-family: 'VT323', Courier;
+      padding: 8px 15px;
+      font-size: 20px;
+      border-top: 5px solid #fff;
+      border-bottom: 5px solid #fff;
+      position: relative;
+      &:before, &:after
+        width: 5px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: -5px;
+        background-color: #FFF;
+        display: block;
+        content: "";
+      &:after
+        right: -5px;
+        left: auto;
     &.flash
       background-color #fff
       transition background-color 0s
@@ -23,6 +59,10 @@ body
       position absolute
       top 0
       left 0
+      background-image url("../img/instructions.png")
+      background-repeat no-repeat
+      background-position center center
+      background-size contain
 
 #fork
   image '../img/fork.png' 149px 149px
@@ -131,8 +171,8 @@ body
           transform rotate(10deg)
         .dog
           height 100px
-          image '../img/dog.png' 353px 224px
-          background-size contain
+          image '../img/dog.png' 80px auto
+          background-size 80px auto
           background-repeat no-repeat
           width 80px
           position absolute
@@ -332,7 +372,7 @@ body
         transform rotateY(0deg) translateZ(0px)
         .screen
           width 14px * 12
-          height 14px * 22 
+          height 14px * 22
           margin-left 0px
           margin-top 14px
           background-color #eee
@@ -810,15 +850,15 @@ body
       image '../img/pointer.png' 72px 57px
       position absolute
       z-index 1000
-  
+
 @keyframes laugh
   to
     background-position 383px 0
-    
+
 @keyframes fly
   to
     background-position -1100px 0
-    
+
 @keyframes dog
   0%
     transform rotate(13deg)
@@ -872,7 +912,7 @@ body
     transform translateY(15px) translateX(30px)
   100%
     transform translateX(0px)
-    
+
 @keyframes frantic
   0%
     transform translateX(0px)
@@ -896,7 +936,7 @@ body
     transform translateY(120px) translateX(20px)
   100%
     transform translateX(0px)
-    
+
 @keyframes spin
   0%
     transform rotate(0deg)
@@ -904,7 +944,7 @@ body
     transform rotate(180deg)
   100%
     transform rotate(360deg)
-    
+
 @keyframes flash
   0%
     opacity 1
@@ -912,7 +952,7 @@ body
     opacity 0
   100%
     opacity 1
-    
+
 @keyframes logo
   0%
     transform translate(0)
@@ -920,7 +960,7 @@ body
     transform translateY(15px)
   100%
     transform translate(0)
-    
+
 @keyframes shadow
   0%
     transform scaleY(.2)
@@ -928,7 +968,7 @@ body
     transform scaleY(.25) scaleX(1.2)
   100%
     transform scaleY(.2)
-    
+
 @keyframes phone-spin
   0%
     transform rotateX(610deg) rotateY(0deg) rotateZ(200deg)
